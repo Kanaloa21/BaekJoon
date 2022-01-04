@@ -1,3 +1,5 @@
+# 쉬운 계단 수
+
 def func(n):
     global dp
     if n > 1:
