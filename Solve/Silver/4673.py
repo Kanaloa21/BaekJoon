@@ -1,3 +1,4 @@
+# 셀프 넘버
 import time
 
 def SelfNum():

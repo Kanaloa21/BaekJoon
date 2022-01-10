@@ -1,4 +1,5 @@
-#import time
+# 한수
+import time
 def sol(n):
     res = n
     if n > 99:
@@ -11,7 +12,7 @@ def sol(n):
                     break
     else: pass
     return res
-#start = time.time()
+start = time.time()
 n = int(input())
 print(sol(n))
-#print(f'Run time: {time.time() - start}')
+print(f'Run time: {time.time() - start}')
