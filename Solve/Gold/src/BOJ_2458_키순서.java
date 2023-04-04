@@ -12,6 +12,7 @@ public class BOJ_2458_키순서 {
 	static int m;
 	static boolean[] isVisited;
 	static ArrayList<ArrayList<Integer>> adjList;
+	static ArrayList<ArrayList<Integer>> adjListRev;
 
 	public static void main(String[] args) throws IOException {
 		// 내 뒤로 전부 탐색, 단 앞으로 가면 안됨
@@ -24,8 +25,10 @@ public class BOJ_2458_키순서 {
 		n = Integer.parseInt(st.nextToken());
 		m = Integer.parseInt(st.nextToken());
 		adjList = new ArrayList<>();
+		adjListRev = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
 			adjList.add(new ArrayList<>());
+			adjListRev.add(new ArrayList<>());
 		}
 
 		for (int i = 0; i < m; i++) {
@@ -33,6 +36,7 @@ public class BOJ_2458_키순서 {
 			int start = Integer.parseInt(st.nextToken()) - 1;
 			int end = Integer.parseInt(st.nextToken()) - 1;
 			adjList.get(start).add(end);
+			adjListRev.get(end).add(start);
 		}
 
 		isVisited = new boolean[n];
@@ -61,7 +65,7 @@ public class BOJ_2458_키순서 {
 	static void dfs_front(int idx) {
 		// 나보다 큰애 찾기
 		for (int node : adjList.get(idx)) {
-			if (isVisited[node] = true)
+			if (isVisited[node])
 				continue;
 			isVisited[node] = true;
 			dfs_front(node);
@@ -70,13 +74,11 @@ public class BOJ_2458_키순서 {
 
 	static void dfs_back(int idx) {
 		// 나보다 작은애 찾기
-		for (int i = 0; i < n; i++) {
-			if (i == idx || isVisited[i] == true)
+		for (int node : adjListRev.get(idx)) {
+			if (isVisited[node])
 				continue;
-			if (adjList.get(i).contains(idx)) {
-				isVisited[i] = true;
-				dfs_back(i);
-			}
+			isVisited[node] = true;
+			dfs_back(node);
 		}
 	}
 }
